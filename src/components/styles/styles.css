@@ -103,6 +103,8 @@ input, textarea {
     border-radius: 15px;
     width: 40%;
     cursor: pointer;
+    margin: 20px;
+    float: left;
 }
   
 .card:hover {
@@ -111,4 +113,6 @@ input, textarea {
   
 .container {
     padding: 2px 16px;
+    align-items: center;
 }
+

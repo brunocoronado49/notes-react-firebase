@@ -18,7 +18,7 @@ export const addNote = newNote =>
 
 // Get all notes
 export const getNotes = () => 
-    getNotes(collection(db, collectionName))
+    getDocs(collection(db, collectionName))
 
 // Get note
 export const getNote = id => 
@@ -29,7 +29,7 @@ export const updateNote = (id, fields) =>
     updateDoc(doc(db, collectionName, id), fields);
 
 // Delete notes
-export const deleteNote = id => 
+export const deleteNote = (id) => 
     deleteDoc(doc(db, collectionName, id));
 
 // onGetNotes
