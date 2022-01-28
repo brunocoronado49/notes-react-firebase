@@ -3,11 +3,13 @@ import { deleteNote } from '../../api/api';
 import { useLocation } from "wouter";
 
 const CardNote = ({note}) => {
+    const [location, setLocation] = useLocation();
 
-    const deleteNote = async (id) => {
+    const onDeleteNote = async (id) => {
         if(window.confirm("Do you want delete this note?")) {
             await deleteNote(id);
             alert("Note dleted successfully!")
+            setLocation("/notes");
         }
     }
 
@@ -21,7 +23,7 @@ const CardNote = ({note}) => {
                     className="btn-delete"
                     onClick={event => {
                         event.stopPropagation();
-                        deleteNote(note.id)
+                        onDeleteNote(note.id)
                     }}
                 >Delete</button>
             </div>
