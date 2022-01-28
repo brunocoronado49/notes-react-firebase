@@ -1,9 +1,14 @@
 import React from 'react';
 
-const CardNote = () => {
+const CardNote = ({title, description}) => {
     return (
-        <div>
-            <h1>Card Note</h1>
+        <div className="card">
+            <div className="container">
+                <h3><b>{title}</b></h3>
+                <p>{description}</p>
+                <button className="btn-update">Update</button>
+                <button className="btn-delete">Delete</button>
+            </div>
         </div>
     );
 };
