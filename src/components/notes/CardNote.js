@@ -18,7 +18,6 @@ const CardNote = ({note}) => {
             <div className="container">
                 <h3><b>{note.title}</b></h3>
                 <p>{note.description}</p>
-                <button className="btn-update">Update</button>
                 <button 
                     className="btn-delete"
                     onClick={event => {

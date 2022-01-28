@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link } from 'wouter';
+import { Link, useRoute } from 'wouter';
 import './style.css';
 
-const Nav = () => {
+const Nav = (params) => {
+
+    const [isActive] = useRoute(params.to);
+
     return (
         <ul>
             <li>

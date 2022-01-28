@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { addNote } from '../../api/api';
+import { motion } from 'framer-motion';
+import { variants } from '../../sources/Variants';
 
 const initialValues = {
   title: "",
   description: ""
 }
-
-const error = "This field is required";
 
 const FormCreateNote = () => {
   const [notes, setNotes] = useState(initialValues);
@@ -33,7 +33,12 @@ const FormCreateNote = () => {
   return (
     <div className="form">
       <h1 className="title-form">Create a note</h1>
-      <form onSubmit={handleSubmit}>
+      <motion.form 
+        onSubmit={handleSubmit}
+        variants={variants}
+        initial="hidden"
+        animate="show"
+      >
         <input 
           type="text"
           name="title"
@@ -47,7 +52,7 @@ const FormCreateNote = () => {
           onChange={handleChange}
         ></textarea>
         <button className="btn-form">Save</button>
-      </form>
+      </motion.form>
     </div>
   );
 };
