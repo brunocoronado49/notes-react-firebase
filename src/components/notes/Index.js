@@ -44,11 +44,9 @@ const Index = () => {
                         variants={variants}
                         initial="hidden"
                         animate="show"
+                        key={note.id}
                     >
-                        <CardNote
-                            key={note.id} 
-                            note={note}
-                        />
+                        <CardNote note={note} />
                     </motion.div>
                 ))
             }

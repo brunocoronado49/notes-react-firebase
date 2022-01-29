@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { addNote } from '../../api/api';
 import { motion } from 'framer-motion';
 import { variants } from '../../sources/Variants';
+import { getNote, updateNote } from '../../api/api';
 
 const initialValues = {
-  title: "",
-  description: ""
+  name: '',
+  description: ''
 }
 
-const FormCreateNote = () => {
+const FormUpdateNote = ({ id }) => {
   const [notes, setNotes] = useState(initialValues);
   const [location, setLocation] = useLocation();
 
@@ -20,41 +20,50 @@ const FormCreateNote = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    await addNote(notes);
-
-    if(window.confirm('Note added succefully!')) {
-      setNotes(initialValues);
-      setLocation("/notes");
-    }
-
+    await updateNote(id);
+    alert('Note updated successfully!');
+    setLocation("/notes");
   }
+
+  const getNoteById = async (id) => {
+    try {
+      const doc = await getNote(id);
+      setNotes({...doc.data()})
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getNoteById(id);
+  }, [id]);
 
   return (
     <div className="form">
-      <h1 className="title-form">Create note</h1>
-      <motion.form 
+      <h1 className="title-form">Update note</h1>
+      <motion.form
         onSubmit={handleSubmit}
         variants={variants}
         initial="hidden"
         animate="show"
       >
-        <input 
+        <input
           type="text"
           name="title"
-          placeholder="Title" 
+          placeholder="Title"
           onChange={handleChange}
+          value={notes.title}
         />
-        <textarea 
-          cols="25" 
-          rows="5" 
+        <textarea
+          cols="25"
+          rows="5"
           name="description"
           onChange={handleChange}
-        ></textarea>
+        >{notes.description}</textarea>
         <button className="btn-form">Save</button>
       </motion.form>
     </div>
   );
 };
 
-export default FormCreateNote;
+export default FormUpdateNote;

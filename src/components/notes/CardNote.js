@@ -19,6 +19,12 @@ const CardNote = ({note}) => {
                 <h3><b>{note.title}</b></h3>
                 <p>{note.description}</p>
                 <button 
+                    className="btn-update"
+                    onClick={() => {
+                        setLocation(`/update-note/${note.id}`);
+                    }}
+                >Update</button>
+                <button 
                     className="btn-delete"
                     onClick={event => {
                         event.stopPropagation();

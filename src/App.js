@@ -5,6 +5,7 @@ import Home from './pages/home/Home';
 import About from './pages/about/About';
 import Notes from './pages/notes/Notes';
 import CreateNote from './pages/notes/CreateNote';
+import UpdateNote from './pages/notes/UpdateNote';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/about" component={About}/>
         <Route path="/notes" component={Notes}/>
         <Route path="/create-note" component={CreateNote}/>
+        <Route path="/update-note/:id" component={UpdateNote}/>
       </section>
     </div>
   );
