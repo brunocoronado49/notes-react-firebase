@@ -20,23 +20,31 @@ const FormUpdateNote = ({ id }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await updateNote(id);
-    alert('Note updated successfully!');
-    setLocation("/notes");
+
+    if(id) {
+      await updateNote(id, notes);
+      if(window.confirm('Note update successfully!')) {
+        setNotes(initialValues);
+        setLocation("/notes");
+      }
+    }
   }
 
-  const getNoteById = async (id) => {
+  const getNoteById = async (idNote) => {
     try {
-      const doc = await getNote(id);
-      setNotes({...doc.data()})
+      const doc = await getNote(idNote);
+      setNotes({...doc.data()});
     } catch (err) {
       console.log(err);
     }
   }
 
   useEffect(() => {
-    getNoteById(id);
-  }, [id]);
+    console.log(id);
+    if(id) {
+      getNoteById(id);
+    }
+  }, []);
 
   return (
     <div className="form">
@@ -59,8 +67,9 @@ const FormUpdateNote = ({ id }) => {
           rows="5"
           name="description"
           onChange={handleChange}
-        >{notes.description}</textarea>
-        <button className="btn-form">Save</button>
+          value={notes.description}
+        ></textarea>
+        <button className="btn-form">Update</button>
       </motion.form>
     </div>
   );
